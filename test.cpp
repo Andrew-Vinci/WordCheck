@@ -1,17 +1,9 @@
 #include "pch.h"
 
-#include <iostream>
-#include <fstream>
-#include <string>
-
-using namespace std;
-
-
 // Test to make sure everything is working correctly
 
-
 // Test to check for all upper case words in text file
-TEST(TestCaseName, TestName) {
+TEST(WordCheckTest, UpperTest) {
 
 	string line, word;
 	ifstream file("inputFile.txt");
@@ -35,14 +27,14 @@ TEST(TestCaseName, TestName) {
 }
 
 // Test for a provided word to be replaced with a random word from a separate text file
-TEST(TestCaseName, TestName) {
+TEST(WordCheckTest, RandomTest) {
 
 	string word = "WORD";
-	string line, line2, word, word2;
+	string line, line2, word2;
 	bool check = false;
 	int wordCount = 0;
 	ifstream file("inputFile.txt");
-	ifstream file2("randomWords.txt");
+	ifstream file2("words.txt");
 
 	while (file2 >> word) {
 		wordCount++;
@@ -81,13 +73,75 @@ TEST(TestCaseName, TestName) {
 	FAIL();
 
 	file.close();
-
-
-
-
-
 }
 
+// check if words in given file have an extra letter
+TEST(WordCheckTest, ExtraCharTrue) {
+	ifstream inputFile("spellingTrue.txt");
+	string inputLine;
+
+	if (inputFile) {
+		getline(inputFile, inputLine);
+
+		EXPECT_TRUE(extraChar(inputLine));
+	}
+	else {
+		cout << "Input file doesn't exist\n";
+	}
+
+	inputFile.close();
+}
+
+// check if words in given file are real, no extra letter
+TEST(WordCheckTest, ExtraCharFalse) {
+	ifstream inputFile("spellingFalse.txt");
+	string inputLine;
+
+	if (inputFile) {
+		getline(inputFile, inputLine);
+
+		EXPECT_FALSE(extraChar(inputLine));
+	}
+	else {
+		cout << "Input file doesn't exist\n";
+	}
+
+	inputFile.close();
+}
+
+// check if file has swear words
+TEST(WordCheckTest, SwearPresent) {
+	ifstream inputFile("swearTest.txt");
+	string inputLine;
+
+	if (inputFile) {
+		getline(inputFile, inputLine);
+
+		EXPECT_TRUE(swears(inputLine));
+	}
+	else {
+		cout << "Input file doesn't exist\n";
+	}
+
+	inputFile.close();
+}
+
+// check if file is free of swear words
+TEST(WordCheckTest, NoSwearPresent) {
+	ifstream inputFile("noSwearsTest.txt");
+	string inputLine;
+
+	if (inputFile) {
+		getline(inputFile, inputLine);
+
+		EXPECT_FALSE(swears(inputLine));
+	}
+	else {
+		cout << "Input file doesn't exist\n";
+	}
+
+	inputFile.close();
+}
 
 /*
 TEST(TestCaseName, TestName) {

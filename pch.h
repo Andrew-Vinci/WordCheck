@@ -4,6 +4,11 @@
 
 #pragma once
 
+#include <iostream>
+#include <fstream>
+#include <string>
 #include "gtest/gtest.h"
+using namespace std;
 
-int add(int a, int b);
+bool extraChar(string inputLine);
+bool swears(string inputLine);

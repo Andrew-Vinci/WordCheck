@@ -3,11 +3,32 @@
 //
 
 #include "pch.h"
-#include <iostream>
 
+// swear filter func for test
+bool swears(string inputLine) {
 
-
-int add(int num1, int num2) {
-    return num1 + num2;
+    return false;
 }
 
+// extra char func for test
+bool extraChar(string inputLine) {
+
+    return false;
+}
+
+int main() {
+    ifstream inputFile("inputFile.txt");
+    string inputLine;
+
+    if (inputFile) {
+        getline(inputFile, inputLine);
+
+        extraChar(inputLine);
+        swears(inputLine);
+
+    }
+    else {
+        cout << "Could not open the provided file\n";
+    }
+
+}
